@@ -91,8 +91,6 @@ int main()
 {
     init_platform();
 
-    xil_printf("begin\r\n");
-
     bramConfig = XBram_LookupConfig(XPAR_BRAM_0_DEVICE_ID);
     if (!bramConfig) {
         xil_printf("No config found\n");
