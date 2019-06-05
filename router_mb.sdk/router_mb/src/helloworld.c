@@ -62,7 +62,7 @@ u32 all_routes[16][4];
 void printCurrentRoutingTable() {
     u32 offset = 0;
     int j = 0;
-    for (int flag = 1;offset <= 16;j++) {
+    for (int flag = 1;flag;j++) {
         u32 route[4];
         flag = 0;
         for (u32 i = 0;i < 4;i++) {
@@ -75,7 +75,7 @@ void printCurrentRoutingTable() {
         memcpy(all_routes[j], route, sizeof(route));
     }
     j--;
-    xil_printf("Hardware table:\n");
+    xil_printf("Hardware table:\r\n");
     for (int i = 0;i < j;i++) {
         xil_printf("\t%d: ", i);
         printIP(all_routes[i][2]);
@@ -83,7 +83,7 @@ void printCurrentRoutingTable() {
         printIP(all_routes[i][1]);
         xil_printf(" via ");
         printIP(all_routes[i][0]);
-        xil_printf(" dev port%ld\n", all_routes[i][3]);
+        xil_printf(" dev port%ld\r\n", all_routes[i][3]);
     }
 }
 
@@ -91,7 +91,7 @@ int main()
 {
     init_platform();
 
-    xil_printf("begin\n\r");
+    xil_printf("begin\r\n");
 
     bramConfig = XBram_LookupConfig(XPAR_BRAM_0_DEVICE_ID);
     if (!bramConfig) {
@@ -99,15 +99,8 @@ int main()
     }
 
     XBram_CfgInitialize(&bramInstance, bramConfig, bramConfig->CtrlBaseAddress);
-    while (1) {
-        xil_printf("%p\n\r", (bramConfig->MemBaseAddress));
-        xil_printf("%x\n\r", XBram_In32(bramConfig->MemBaseAddress));
-        xil_printf("%x\n\r", XBram_In32(bramConfig->MemBaseAddress + 4));
-        xil_printf("%x\n\r", XBram_In32(bramConfig->MemBaseAddress + 8));
-        xil_printf("%x\n\r", XBram_In32(bramConfig->MemBaseAddress + 12));
-        xil_printf("%x\n\r", XBram_In32(bramConfig->MemBaseAddress + 16));
-        xil_printf("%x\n\r", XBram_In32(bramConfig->MemBaseAddress + 20));
-    }
+
+    printCurrentRoutingTable();
 
     while(1);
 

@@ -84,3 +84,4 @@
 *.sdk/.*/
 !*.sdk/*/src
 *.sdk/*_bsp/
+.Xil/
