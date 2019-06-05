@@ -85,3 +85,4 @@
 !*.sdk/*/src
 *.sdk/*_bsp/
 .Xil/
+!repo/

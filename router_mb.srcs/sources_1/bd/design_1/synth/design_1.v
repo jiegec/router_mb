@@ -1,7 +1,7 @@
 //Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2018.1 (lin64) Build 2188600 Wed Apr  4 18:39:19 MDT 2018
-//Date        : Wed Jun  5 19:01:33 2019
+//Date        : Wed Jun  5 20:41:50 2019
 //Host        : oslab-Ubuntu16 running 64-bit Ubuntu 18.04.2 LTS
 //Command     : generate_target design_1.bd
 //Design      : design_1
@@ -9,61 +9,37 @@
 //--------------------------------------------------------------------------------
 `timescale 1 ps / 1 ps
 
-(* CORE_GENERATION_INFO = "design_1,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=design_1,x_ipVersion=1.00.a,x_ipLanguage=VERILOG,numBlks=33,numReposBlks=24,numNonXlnxBlks=0,numHierBlks=9,maxHierDepth=1,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=0,numPkgbdBlks=0,bdsource=USER,da_axi4_cnt=4,da_board_cnt=6,da_bram_cntlr_cnt=1,da_mb_cnt=1,synth_mode=OOC_per_IP}" *) (* HW_HANDOFF = "design_1.hwdef" *) 
+(* CORE_GENERATION_INFO = "design_1,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=design_1,x_ipVersion=1.00.a,x_ipLanguage=VERILOG,numBlks=35,numReposBlks=26,numNonXlnxBlks=1,numHierBlks=9,maxHierDepth=1,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=0,numPkgbdBlks=0,bdsource=USER,da_axi4_cnt=4,da_board_cnt=6,da_bram_cntlr_cnt=1,da_clkrst_cnt=4,da_mb_cnt=1,synth_mode=OOC_per_IP}" *) (* HW_HANDOFF = "design_1.hwdef" *) 
 module design_1
-   (AXI_STR_RXD_0_tdata,
-    AXI_STR_RXD_0_tlast,
-    AXI_STR_RXD_0_tready,
-    AXI_STR_RXD_0_tvalid,
-    AXI_STR_TXD_0_tdata,
-    AXI_STR_TXD_0_tlast,
-    AXI_STR_TXD_0_tready,
-    AXI_STR_TXD_0_tvalid,
-    axis_clk,
-    clk125M,
-    clk200M,
-    ext_clk,
-    ext_reset_n,
-    routing_table_addr,
-    routing_table_clk,
-    routing_table_din,
-    routing_table_dout,
-    routing_table_en,
-    routing_table_rst,
-    routing_table_we,
-    rx_bytes_tri_i,
-    rx_packets_tri_i,
-    tx_bytes_tri_i,
-    tx_packets_tri_i);
-  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 AXI_STR_RXD_0 TDATA" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME AXI_STR_RXD_0, CLK_DOMAIN /clk_wiz_1_clk_out1, FREQ_HZ 100000000, HAS_TKEEP 0, HAS_TLAST 1, HAS_TREADY 1, HAS_TSTRB 0, LAYERED_METADATA undef, PHASE 0.0, TDATA_NUM_BYTES 4, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0" *) input [31:0]AXI_STR_RXD_0_tdata;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 AXI_STR_RXD_0 TLAST" *) input AXI_STR_RXD_0_tlast;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 AXI_STR_RXD_0 TREADY" *) output AXI_STR_RXD_0_tready;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 AXI_STR_RXD_0 TVALID" *) input AXI_STR_RXD_0_tvalid;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 AXI_STR_TXD_0 TDATA" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME AXI_STR_TXD_0, CLK_DOMAIN /clk_wiz_1_clk_out1, FREQ_HZ 100000000, HAS_TKEEP 0, HAS_TLAST 1, HAS_TREADY 1, HAS_TSTRB 0, LAYERED_METADATA undef, PHASE 0.0, TDATA_NUM_BYTES 4, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0" *) output [31:0]AXI_STR_TXD_0_tdata;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 AXI_STR_TXD_0 TLAST" *) output AXI_STR_TXD_0_tlast;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 AXI_STR_TXD_0 TREADY" *) input AXI_STR_TXD_0_tready;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 AXI_STR_TXD_0 TVALID" *) output AXI_STR_TXD_0_tvalid;
-  (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 CLK.AXIS_CLK CLK" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME CLK.AXIS_CLK, ASSOCIATED_BUSIF AXI_STR_TXD_0:AXI_STR_RXD_0, CLK_DOMAIN /clk_wiz_1_clk_out1, FREQ_HZ 100000000, PHASE 0.0" *) output axis_clk;
-  (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 CLK.CLK125M CLK" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME CLK.CLK125M, CLK_DOMAIN /clk_wiz_1_clk_out1, FREQ_HZ 125000000, PHASE 0.0" *) output clk125M;
-  (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 CLK.CLK200M CLK" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME CLK.CLK200M, CLK_DOMAIN /clk_wiz_1_clk_out1, FREQ_HZ 200000000, PHASE 0.0" *) output clk200M;
-  (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 CLK.EXT_CLK CLK" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME CLK.EXT_CLK, ASSOCIATED_RESET ext_reset_n, CLK_DOMAIN design_1_clk_in1_0, FREQ_HZ 50000000, PHASE 0.000" *) input ext_clk;
-  (* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 RST.EXT_RESET_N RST" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME RST.EXT_RESET_N, POLARITY ACTIVE_LOW" *) input ext_reset_n;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 routing_table ADDR" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME routing_table, MASTER_TYPE BRAM_CTRL, MEM_ECC NONE, MEM_SIZE 16384, MEM_WIDTH 128, READ_WRITE_MODE READ_WRITE" *) output [13:0]routing_table_addr;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 routing_table CLK" *) output routing_table_clk;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 routing_table DIN" *) output [127:0]routing_table_din;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 routing_table DOUT" *) input [127:0]routing_table_dout;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 routing_table EN" *) output routing_table_en;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 routing_table RST" *) output routing_table_rst;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 routing_table WE" *) output [15:0]routing_table_we;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:gpio:1.0 rx_bytes TRI_I" *) input [31:0]rx_bytes_tri_i;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:gpio:1.0 rx_packets TRI_I" *) input [31:0]rx_packets_tri_i;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:gpio:1.0 tx_bytes TRI_I" *) input [31:0]tx_bytes_tri_i;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:gpio:1.0 tx_packets TRI_I" *) input [31:0]tx_packets_tri_i;
+   (clk,
+    reset_n_in,
+    rgmii1_rd,
+    rgmii1_rx_ctl,
+    rgmii1_rxc,
+    rgmii1_td,
+    rgmii1_tx_ctl,
+    rgmii1_txc,
+    rgmii2_rd,
+    rgmii2_rx_ctl,
+    rgmii2_rxc,
+    rgmii2_td,
+    rgmii2_tx_ctl,
+    rgmii2_txc);
+  (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 CLK.CLK CLK" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME CLK.CLK, ASSOCIATED_RESET ext_reset_n_in:reset_n_in, CLK_DOMAIN design_1_clk_in1_0, FREQ_HZ 50000000, PHASE 0.000" *) input clk;
+  (* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 RST.RESET_N_IN RST" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME RST.RESET_N_IN, POLARITY ACTIVE_LOW" *) input reset_n_in;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:rgmii:1.0 rgmii1 " *) input [3:0]rgmii1_rd;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:rgmii:1.0 rgmii1 " *) input rgmii1_rx_ctl;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:rgmii:1.0 rgmii1 " *) input rgmii1_rxc;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:rgmii:1.0 rgmii1 " *) output [3:0]rgmii1_td;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:rgmii:1.0 rgmii1 " *) output rgmii1_tx_ctl;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:rgmii:1.0 rgmii1 " *) output rgmii1_txc;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:rgmii:1.0 rgmii2 " *) input [3:0]rgmii2_rd;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:rgmii:1.0 rgmii2 " *) input rgmii2_rx_ctl;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:rgmii:1.0 rgmii2 " *) input rgmii2_rxc;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:rgmii:1.0 rgmii2 " *) output [3:0]rgmii2_td;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:rgmii:1.0 rgmii2 " *) output rgmii2_tx_ctl;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:rgmii:1.0 rgmii2 " *) output rgmii2_txc;
 
-  wire [31:0]AXI_STR_RXD_0_1_TDATA;
-  wire AXI_STR_RXD_0_1_TLAST;
-  wire AXI_STR_RXD_0_1_TREADY;
-  wire AXI_STR_RXD_0_1_TVALID;
   wire [13:0]axi_bram_ctrl_0_BRAM_PORTA_ADDR;
   wire axi_bram_ctrl_0_BRAM_PORTA_CLK;
   wire [127:0]axi_bram_ctrl_0_BRAM_PORTA_DIN;
@@ -76,15 +52,11 @@ module design_1
   wire axi_fifo_mm_s_0_AXI_STR_TXD_TREADY;
   wire axi_fifo_mm_s_0_AXI_STR_TXD_TVALID;
   wire axi_fifo_mm_s_0_interrupt;
-  wire [31:0]axi_gpio_0_GPIO2_TRI_I;
-  wire [31:0]axi_gpio_0_GPIO_TRI_I;
-  wire [31:0]axi_gpio_1_GPIO2_TRI_I;
-  wire [31:0]axi_gpio_1_GPIO_TRI_I;
   wire clk_in1_0_1;
   wire clk_wiz_1_clk_out2;
   wire clk_wiz_1_clk_out3;
   wire clk_wiz_1_locked;
-  wire ext_reset_n_1;
+  wire [0:0]ext_reset_n_1;
   wire mdm_1_debug_sys_rst;
   wire microblaze_0_Clk;
   wire [31:0]microblaze_0_axi_dp_ARADDR;
@@ -254,35 +226,46 @@ module design_1
   wire microblaze_0_mdm_axi_WREADY;
   wire [3:0]microblaze_0_mdm_axi_WSTRB;
   wire microblaze_0_mdm_axi_WVALID;
+  wire reset_n_0_1;
+  wire [7:0]router_0_axis_rxd_TDATA;
+  wire router_0_axis_rxd_TLAST;
+  wire router_0_axis_rxd_TREADY;
+  wire router_0_axis_rxd_TVALID;
+  wire [3:0]router_0_rgmii1_RD;
+  wire router_0_rgmii1_RXC;
+  wire router_0_rgmii1_RX_CTL;
+  wire [3:0]router_0_rgmii1_TD;
+  wire router_0_rgmii1_TXC;
+  wire router_0_rgmii1_TX_CTL;
+  wire [3:0]router_0_rgmii2_RD;
+  wire router_0_rgmii2_RXC;
+  wire router_0_rgmii2_RX_CTL;
+  wire [3:0]router_0_rgmii2_TD;
+  wire router_0_rgmii2_TXC;
+  wire router_0_rgmii2_TX_CTL;
+  wire [255:0]router_0_stats_rx_bytes;
+  wire [255:0]router_0_stats_rx_packets;
+  wire [255:0]router_0_stats_tx_bytes;
+  wire [255:0]router_0_stats_tx_packets;
   wire [0:0]rst_clk_wiz_1_100M_bus_struct_reset;
   wire [0:0]rst_clk_wiz_1_100M_interconnect_aresetn;
   wire rst_clk_wiz_1_100M_mb_reset;
   wire [0:0]rst_clk_wiz_1_100M_peripheral_aresetn;
 
-  assign AXI_STR_RXD_0_1_TDATA = AXI_STR_RXD_0_tdata[31:0];
-  assign AXI_STR_RXD_0_1_TLAST = AXI_STR_RXD_0_tlast;
-  assign AXI_STR_RXD_0_1_TVALID = AXI_STR_RXD_0_tvalid;
-  assign AXI_STR_RXD_0_tready = AXI_STR_RXD_0_1_TREADY;
-  assign AXI_STR_TXD_0_tdata[31:0] = axi_fifo_mm_s_0_AXI_STR_TXD_TDATA;
-  assign AXI_STR_TXD_0_tlast = axi_fifo_mm_s_0_AXI_STR_TXD_TLAST;
-  assign AXI_STR_TXD_0_tvalid = axi_fifo_mm_s_0_AXI_STR_TXD_TVALID;
-  assign axi_bram_ctrl_0_BRAM_PORTA_DOUT = routing_table_dout[127:0];
-  assign axi_fifo_mm_s_0_AXI_STR_TXD_TREADY = AXI_STR_TXD_0_tready;
-  assign axi_gpio_0_GPIO2_TRI_I = rx_packets_tri_i[31:0];
-  assign axi_gpio_0_GPIO_TRI_I = rx_bytes_tri_i[31:0];
-  assign axi_gpio_1_GPIO2_TRI_I = tx_packets_tri_i[31:0];
-  assign axi_gpio_1_GPIO_TRI_I = tx_bytes_tri_i[31:0];
-  assign axis_clk = microblaze_0_Clk;
-  assign clk125M = clk_wiz_1_clk_out2;
-  assign clk200M = clk_wiz_1_clk_out3;
-  assign clk_in1_0_1 = ext_clk;
-  assign ext_reset_n_1 = ext_reset_n;
-  assign routing_table_addr[13:0] = axi_bram_ctrl_0_BRAM_PORTA_ADDR;
-  assign routing_table_clk = axi_bram_ctrl_0_BRAM_PORTA_CLK;
-  assign routing_table_din[127:0] = axi_bram_ctrl_0_BRAM_PORTA_DIN;
-  assign routing_table_en = axi_bram_ctrl_0_BRAM_PORTA_EN;
-  assign routing_table_rst = axi_bram_ctrl_0_BRAM_PORTA_RST;
-  assign routing_table_we[15:0] = axi_bram_ctrl_0_BRAM_PORTA_WE;
+  assign clk_in1_0_1 = clk;
+  assign reset_n_0_1 = reset_n_in;
+  assign rgmii1_td[3:0] = router_0_rgmii1_TD;
+  assign rgmii1_tx_ctl = router_0_rgmii1_TX_CTL;
+  assign rgmii1_txc = router_0_rgmii1_TXC;
+  assign rgmii2_td[3:0] = router_0_rgmii2_TD;
+  assign rgmii2_tx_ctl = router_0_rgmii2_TX_CTL;
+  assign rgmii2_txc = router_0_rgmii2_TXC;
+  assign router_0_rgmii1_RD = rgmii1_rd[3:0];
+  assign router_0_rgmii1_RXC = rgmii1_rxc;
+  assign router_0_rgmii1_RX_CTL = rgmii1_rx_ctl;
+  assign router_0_rgmii2_RD = rgmii2_rd[3:0];
+  assign router_0_rgmii2_RXC = rgmii2_rxc;
+  assign router_0_rgmii2_RX_CTL = rgmii2_rx_ctl;
   design_1_axi_bram_ctrl_0_0 axi_bram_ctrl_0
        (.bram_addr_a(axi_bram_ctrl_0_BRAM_PORTA_ADDR),
         .bram_clk_a(axi_bram_ctrl_0_BRAM_PORTA_CLK),
@@ -325,10 +308,10 @@ module design_1
         .s_axi_wstrb(microblaze_0_axi_periph_M05_AXI_WSTRB),
         .s_axi_wvalid(microblaze_0_axi_periph_M05_AXI_WVALID));
   design_1_axi_fifo_mm_s_0_0 axi_fifo_mm_s_0
-       (.axi_str_rxd_tdata(AXI_STR_RXD_0_1_TDATA),
-        .axi_str_rxd_tlast(AXI_STR_RXD_0_1_TLAST),
-        .axi_str_rxd_tready(AXI_STR_RXD_0_1_TREADY),
-        .axi_str_rxd_tvalid(AXI_STR_RXD_0_1_TVALID),
+       (.axi_str_rxd_tdata({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,router_0_axis_rxd_TDATA}),
+        .axi_str_rxd_tlast(router_0_axis_rxd_TLAST),
+        .axi_str_rxd_tready(router_0_axis_rxd_TREADY),
+        .axi_str_rxd_tvalid(router_0_axis_rxd_TVALID),
         .axi_str_txd_tdata(axi_fifo_mm_s_0_AXI_STR_TXD_TDATA),
         .axi_str_txd_tlast(axi_fifo_mm_s_0_AXI_STR_TXD_TLAST),
         .axi_str_txd_tready(axi_fifo_mm_s_0_AXI_STR_TXD_TREADY),
@@ -354,8 +337,8 @@ module design_1
         .s_axi_wstrb(microblaze_0_axi_periph_M02_AXI_WSTRB),
         .s_axi_wvalid(microblaze_0_axi_periph_M02_AXI_WVALID));
   design_1_axi_gpio_0_0 axi_gpio_0
-       (.gpio2_io_i(axi_gpio_0_GPIO2_TRI_I),
-        .gpio_io_i(axi_gpio_0_GPIO_TRI_I),
+       (.gpio2_io_i(router_0_stats_rx_bytes[31:0]),
+        .gpio_io_i(router_0_stats_rx_packets[31:0]),
         .s_axi_aclk(microblaze_0_Clk),
         .s_axi_araddr(microblaze_0_axi_periph_M03_AXI_ARADDR[8:0]),
         .s_axi_aresetn(rst_clk_wiz_1_100M_peripheral_aresetn),
@@ -376,8 +359,8 @@ module design_1
         .s_axi_wstrb(microblaze_0_axi_periph_M03_AXI_WSTRB),
         .s_axi_wvalid(microblaze_0_axi_periph_M03_AXI_WVALID));
   design_1_axi_gpio_1_0 axi_gpio_1
-       (.gpio2_io_i(axi_gpio_1_GPIO2_TRI_I),
-        .gpio_io_i(axi_gpio_1_GPIO_TRI_I),
+       (.gpio2_io_i(router_0_stats_tx_bytes[31:0]),
+        .gpio_io_i(router_0_stats_tx_packets[31:0]),
         .s_axi_aclk(microblaze_0_Clk),
         .s_axi_araddr(microblaze_0_axi_periph_M04_AXI_ARADDR[8:0]),
         .s_axi_aresetn(rst_clk_wiz_1_100M_peripheral_aresetn),
@@ -692,6 +675,43 @@ module design_1
   design_1_microblaze_0_xlconcat_0 microblaze_0_xlconcat
        (.In0(axi_fifo_mm_s_0_interrupt),
         .dout(microblaze_0_intr));
+  design_1_router_0_0 router_0
+       (.axis_clk(microblaze_0_Clk),
+        .axis_rxd_tdata(router_0_axis_rxd_TDATA),
+        .axis_rxd_tlast(router_0_axis_rxd_TLAST),
+        .axis_rxd_tready(router_0_axis_rxd_TREADY),
+        .axis_rxd_tvalid(router_0_axis_rxd_TVALID),
+        .axis_txd_tdata(axi_fifo_mm_s_0_AXI_STR_TXD_TDATA[7:0]),
+        .axis_txd_tlast(axi_fifo_mm_s_0_AXI_STR_TXD_TLAST),
+        .axis_txd_tready(axi_fifo_mm_s_0_AXI_STR_TXD_TREADY),
+        .axis_txd_tvalid(axi_fifo_mm_s_0_AXI_STR_TXD_TVALID),
+        .clk(microblaze_0_Clk),
+        .clk_125M(clk_wiz_1_clk_out2),
+        .clk_200M(clk_wiz_1_clk_out3),
+        .os_addr({1'b0,1'b0,axi_bram_ctrl_0_BRAM_PORTA_ADDR}),
+        .os_clk(axi_bram_ctrl_0_BRAM_PORTA_CLK),
+        .os_din(axi_bram_ctrl_0_BRAM_PORTA_DIN),
+        .os_dout(axi_bram_ctrl_0_BRAM_PORTA_DOUT),
+        .os_en(axi_bram_ctrl_0_BRAM_PORTA_EN),
+        .os_rst(axi_bram_ctrl_0_BRAM_PORTA_RST),
+        .os_we(axi_bram_ctrl_0_BRAM_PORTA_WE),
+        .reset_n(reset_n_0_1),
+        .rgmii1_rd(router_0_rgmii1_RD),
+        .rgmii1_rx_ctl(router_0_rgmii1_RX_CTL),
+        .rgmii1_rxc(router_0_rgmii1_RXC),
+        .rgmii1_td(router_0_rgmii1_TD),
+        .rgmii1_tx_ctl(router_0_rgmii1_TX_CTL),
+        .rgmii1_txc(router_0_rgmii1_TXC),
+        .rgmii2_rd(router_0_rgmii2_RD),
+        .rgmii2_rx_ctl(router_0_rgmii2_RX_CTL),
+        .rgmii2_rxc(router_0_rgmii2_RXC),
+        .rgmii2_td(router_0_rgmii2_TD),
+        .rgmii2_tx_ctl(router_0_rgmii2_TX_CTL),
+        .rgmii2_txc(router_0_rgmii2_TXC),
+        .stats_rx_bytes(router_0_stats_rx_bytes),
+        .stats_rx_packets(router_0_stats_rx_packets),
+        .stats_tx_bytes(router_0_stats_tx_bytes),
+        .stats_tx_packets(router_0_stats_tx_packets));
   design_1_rst_clk_wiz_1_100M_0 rst_clk_wiz_1_100M
        (.aux_reset_in(1'b1),
         .bus_struct_reset(rst_clk_wiz_1_100M_bus_struct_reset),
@@ -702,6 +722,8 @@ module design_1
         .mb_reset(rst_clk_wiz_1_100M_mb_reset),
         .peripheral_aresetn(rst_clk_wiz_1_100M_peripheral_aresetn),
         .slowest_sync_clk(microblaze_0_Clk));
+  design_1_xlconstant_0_0 xlconstant_0
+       (.dout(ext_reset_n_1));
 endmodule
 
 module design_1_microblaze_0_axi_periph_0

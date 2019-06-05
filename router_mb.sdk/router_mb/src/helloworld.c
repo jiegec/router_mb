@@ -49,8 +49,12 @@
 #include "platform.h"
 #include "xil_printf.h"
 #include "xbram.h"
+#include "xllfifo.h"
 
+XLlFifo fifoInstance;
 XBram bramInstance;
+
+XLlFifo_Config *fifoConfig;
 XBram_Config *bramConfig;
 
 void printIP(u32 ip) {
@@ -91,17 +95,43 @@ int main()
 {
     init_platform();
 
+    fifoConfig = XLlFfio_LookupConfig(XPAR_AXI_FIFO_0_DEVICE_ID);
+    if (!fifoConfig) {
+        printf("No config found\n");
+        goto fail;
+    }
+
+    XLlFifo_CfgInitialize(&fifoInstance, fifoConfig, fifoConfig->BaseAddress);
+
+	XLlFifo_IntClear(&fifoInstance,0xffffffff);
+
     bramConfig = XBram_LookupConfig(XPAR_BRAM_0_DEVICE_ID);
     if (!bramConfig) {
         xil_printf("No config found\n");
+        goto fail;
     }
 
     XBram_CfgInitialize(&bramInstance, bramConfig, bramConfig->CtrlBaseAddress);
 
     printCurrentRoutingTable();
 
-    while(1);
+    u8 buffer[2048];
+    u32 count = 0;
+    xil_printf("Waiting for data\r\n");
+    for (u32 time = 0;;time++) {
+        if (XLlFifo_iRxOccupancy(&fifoInstance)) {
+            u32 receiveLength = XLlFifo_iRxGetLen(&fifoInstance) / 4;
+            xil_printf("%ld: Got length %ld\r\nData: ", ++count, receiveLength);
+            for (u32 i = 0;i < receiveLength;i++) {
+                u32 word = XLlFifo_RxGetWord(&fifoInstance);
+                buffer[i] = word;
+                xil_printf("%02lx", word);
+            }
+            xil_printf("\r\n");
+        }
+    }
 
+fail:
     cleanup_platform();
     return 0;
 }

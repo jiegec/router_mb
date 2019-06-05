@@ -238,48 +238,16 @@ proc create_root_design { parentCell } {
 
 
   # Create interface ports
-  set AXI_STR_RXD_0 [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:axis_rtl:1.0 AXI_STR_RXD_0 ]
-  set_property -dict [ list \
-   CONFIG.HAS_TKEEP {0} \
-   CONFIG.HAS_TLAST {1} \
-   CONFIG.HAS_TREADY {1} \
-   CONFIG.HAS_TSTRB {0} \
-   CONFIG.LAYERED_METADATA {undef} \
-   CONFIG.TDATA_NUM_BYTES {4} \
-   CONFIG.TDEST_WIDTH {0} \
-   CONFIG.TID_WIDTH {0} \
-   CONFIG.TUSER_WIDTH {0} \
-   ] $AXI_STR_RXD_0
-  set AXI_STR_TXD_0 [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:axis_rtl:1.0 AXI_STR_TXD_0 ]
-  set routing_table [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:bram_rtl:1.0 routing_table ]
-  set_property -dict [ list \
-   CONFIG.MASTER_TYPE {BRAM_CTRL} \
-   CONFIG.READ_WRITE_MODE {READ_WRITE} \
-   ] $routing_table
-  set rx_bytes [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:gpio_rtl:1.0 rx_bytes ]
-  set rx_packets [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:gpio_rtl:1.0 rx_packets ]
-  set tx_bytes [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:gpio_rtl:1.0 tx_bytes ]
-  set tx_packets [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:gpio_rtl:1.0 tx_packets ]
+  set rgmii1 [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:rgmii_rtl:1.0 rgmii1 ]
+  set rgmii2 [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:rgmii_rtl:1.0 rgmii2 ]
 
   # Create ports
-  set axis_clk [ create_bd_port -dir O -type clk axis_clk ]
+  set clk [ create_bd_port -dir I -type clk clk ]
   set_property -dict [ list \
-   CONFIG.ASSOCIATED_BUSIF {AXI_STR_TXD_0:AXI_STR_RXD_0} \
- ] $axis_clk
-  set clk125M [ create_bd_port -dir O -type clk clk125M ]
-  set_property -dict [ list \
-   CONFIG.FREQ_HZ {125000000} \
- ] $clk125M
-  set clk200M [ create_bd_port -dir O -type clk clk200M ]
-  set ext_clk [ create_bd_port -dir I -type clk ext_clk ]
-  set_property -dict [ list \
-   CONFIG.ASSOCIATED_RESET {ext_reset_n} \
+   CONFIG.ASSOCIATED_RESET {ext_reset_n_in:reset_n_in} \
    CONFIG.FREQ_HZ {50000000} \
- ] $ext_clk
-  set ext_reset_n [ create_bd_port -dir I -type rst ext_reset_n ]
-  set_property -dict [ list \
-   CONFIG.POLARITY {ACTIVE_LOW} \
- ] $ext_reset_n
+ ] $clk
+  set reset_n_in [ create_bd_port -dir I -type rst reset_n_in ]
 
   # Create instance: axi_bram_ctrl_0, and set properties
   set axi_bram_ctrl_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_bram_ctrl:4.0 axi_bram_ctrl_0 ]
@@ -373,17 +341,18 @@ proc create_root_design { parentCell } {
    CONFIG.NUM_PORTS {1} \
  ] $microblaze_0_xlconcat
 
+  # Create instance: router_0, and set properties
+  set router_0 [ create_bd_cell -type ip -vlnv me.jiegec:ip:router:1.0 router_0 ]
+
   # Create instance: rst_clk_wiz_1_100M, and set properties
   set rst_clk_wiz_1_100M [ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset:5.0 rst_clk_wiz_1_100M ]
 
+  # Create instance: xlconstant_0, and set properties
+  set xlconstant_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 xlconstant_0 ]
+
   # Create interface connections
-  connect_bd_intf_net -intf_net AXI_STR_RXD_0_1 [get_bd_intf_ports AXI_STR_RXD_0] [get_bd_intf_pins axi_fifo_mm_s_0/AXI_STR_RXD]
-  connect_bd_intf_net -intf_net axi_bram_ctrl_0_BRAM_PORTA [get_bd_intf_ports routing_table] [get_bd_intf_pins axi_bram_ctrl_0/BRAM_PORTA]
-  connect_bd_intf_net -intf_net axi_fifo_mm_s_0_AXI_STR_TXD [get_bd_intf_ports AXI_STR_TXD_0] [get_bd_intf_pins axi_fifo_mm_s_0/AXI_STR_TXD]
-  connect_bd_intf_net -intf_net axi_gpio_0_GPIO [get_bd_intf_ports rx_bytes] [get_bd_intf_pins axi_gpio_0/GPIO]
-  connect_bd_intf_net -intf_net axi_gpio_0_GPIO2 [get_bd_intf_ports rx_packets] [get_bd_intf_pins axi_gpio_0/GPIO2]
-  connect_bd_intf_net -intf_net axi_gpio_1_GPIO [get_bd_intf_ports tx_bytes] [get_bd_intf_pins axi_gpio_1/GPIO]
-  connect_bd_intf_net -intf_net axi_gpio_1_GPIO2 [get_bd_intf_ports tx_packets] [get_bd_intf_pins axi_gpio_1/GPIO2]
+  connect_bd_intf_net -intf_net axi_bram_ctrl_0_BRAM_PORTA [get_bd_intf_pins axi_bram_ctrl_0/BRAM_PORTA] [get_bd_intf_pins router_0/routing_table]
+  connect_bd_intf_net -intf_net axi_fifo_mm_s_0_AXI_STR_TXD [get_bd_intf_pins axi_fifo_mm_s_0/AXI_STR_TXD] [get_bd_intf_pins router_0/axis_txd]
   connect_bd_intf_net -intf_net microblaze_0_axi_dp [get_bd_intf_pins microblaze_0/M_AXI_DP] [get_bd_intf_pins microblaze_0_axi_periph/S00_AXI]
   connect_bd_intf_net -intf_net microblaze_0_axi_periph_M02_AXI [get_bd_intf_pins axi_fifo_mm_s_0/S_AXI] [get_bd_intf_pins microblaze_0_axi_periph/M02_AXI]
   connect_bd_intf_net -intf_net microblaze_0_axi_periph_M03_AXI [get_bd_intf_pins axi_gpio_0/S_AXI] [get_bd_intf_pins microblaze_0_axi_periph/M03_AXI]
@@ -395,17 +364,25 @@ proc create_root_design { parentCell } {
   connect_bd_intf_net -intf_net microblaze_0_intc_axi [get_bd_intf_pins microblaze_0_axi_intc/s_axi] [get_bd_intf_pins microblaze_0_axi_periph/M00_AXI]
   connect_bd_intf_net -intf_net microblaze_0_interrupt [get_bd_intf_pins microblaze_0/INTERRUPT] [get_bd_intf_pins microblaze_0_axi_intc/interrupt]
   connect_bd_intf_net -intf_net microblaze_0_mdm_axi [get_bd_intf_pins mdm_1/S_AXI] [get_bd_intf_pins microblaze_0_axi_periph/M01_AXI]
+  connect_bd_intf_net -intf_net router_0_axis_rxd [get_bd_intf_pins axi_fifo_mm_s_0/AXI_STR_RXD] [get_bd_intf_pins router_0/axis_rxd]
+  connect_bd_intf_net -intf_net router_0_rgmii1 [get_bd_intf_ports rgmii1] [get_bd_intf_pins router_0/rgmii1]
+  connect_bd_intf_net -intf_net router_0_rgmii2 [get_bd_intf_ports rgmii2] [get_bd_intf_pins router_0/rgmii2]
 
   # Create port connections
   connect_bd_net -net axi_fifo_mm_s_0_interrupt [get_bd_pins axi_fifo_mm_s_0/interrupt] [get_bd_pins microblaze_0_xlconcat/In0]
-  connect_bd_net -net clk_in1_0_1 [get_bd_ports ext_clk] [get_bd_pins clk_wiz_1/clk_in1]
-  connect_bd_net -net clk_wiz_1_clk_out2 [get_bd_ports clk125M] [get_bd_pins clk_wiz_1/clk_out2]
-  connect_bd_net -net clk_wiz_1_clk_out3 [get_bd_ports clk200M] [get_bd_pins clk_wiz_1/clk_out3]
+  connect_bd_net -net clk_in1_0_1 [get_bd_ports clk] [get_bd_pins clk_wiz_1/clk_in1]
+  connect_bd_net -net clk_wiz_1_clk_out2 [get_bd_pins clk_wiz_1/clk_out2] [get_bd_pins router_0/clk_125M]
+  connect_bd_net -net clk_wiz_1_clk_out3 [get_bd_pins clk_wiz_1/clk_out3] [get_bd_pins router_0/clk_200M]
   connect_bd_net -net clk_wiz_1_locked [get_bd_pins clk_wiz_1/locked] [get_bd_pins rst_clk_wiz_1_100M/dcm_locked]
-  connect_bd_net -net ext_reset_n_1 [get_bd_ports ext_reset_n] [get_bd_pins clk_wiz_1/resetn] [get_bd_pins rst_clk_wiz_1_100M/ext_reset_in]
+  connect_bd_net -net ext_reset_n_1 [get_bd_pins clk_wiz_1/resetn] [get_bd_pins rst_clk_wiz_1_100M/ext_reset_in] [get_bd_pins xlconstant_0/dout]
   connect_bd_net -net mdm_1_debug_sys_rst [get_bd_pins mdm_1/Debug_SYS_Rst] [get_bd_pins rst_clk_wiz_1_100M/mb_debug_sys_rst]
-  connect_bd_net -net microblaze_0_Clk [get_bd_ports axis_clk] [get_bd_pins axi_bram_ctrl_0/s_axi_aclk] [get_bd_pins axi_fifo_mm_s_0/s_axi_aclk] [get_bd_pins axi_gpio_0/s_axi_aclk] [get_bd_pins axi_gpio_1/s_axi_aclk] [get_bd_pins clk_wiz_1/clk_out1] [get_bd_pins mdm_1/S_AXI_ACLK] [get_bd_pins microblaze_0/Clk] [get_bd_pins microblaze_0_axi_intc/processor_clk] [get_bd_pins microblaze_0_axi_intc/s_axi_aclk] [get_bd_pins microblaze_0_axi_periph/ACLK] [get_bd_pins microblaze_0_axi_periph/M00_ACLK] [get_bd_pins microblaze_0_axi_periph/M01_ACLK] [get_bd_pins microblaze_0_axi_periph/M02_ACLK] [get_bd_pins microblaze_0_axi_periph/M03_ACLK] [get_bd_pins microblaze_0_axi_periph/M04_ACLK] [get_bd_pins microblaze_0_axi_periph/M05_ACLK] [get_bd_pins microblaze_0_axi_periph/S00_ACLK] [get_bd_pins microblaze_0_local_memory/LMB_Clk] [get_bd_pins rst_clk_wiz_1_100M/slowest_sync_clk]
+  connect_bd_net -net microblaze_0_Clk [get_bd_pins axi_bram_ctrl_0/s_axi_aclk] [get_bd_pins axi_fifo_mm_s_0/s_axi_aclk] [get_bd_pins axi_gpio_0/s_axi_aclk] [get_bd_pins axi_gpio_1/s_axi_aclk] [get_bd_pins clk_wiz_1/clk_out1] [get_bd_pins mdm_1/S_AXI_ACLK] [get_bd_pins microblaze_0/Clk] [get_bd_pins microblaze_0_axi_intc/processor_clk] [get_bd_pins microblaze_0_axi_intc/s_axi_aclk] [get_bd_pins microblaze_0_axi_periph/ACLK] [get_bd_pins microblaze_0_axi_periph/M00_ACLK] [get_bd_pins microblaze_0_axi_periph/M01_ACLK] [get_bd_pins microblaze_0_axi_periph/M02_ACLK] [get_bd_pins microblaze_0_axi_periph/M03_ACLK] [get_bd_pins microblaze_0_axi_periph/M04_ACLK] [get_bd_pins microblaze_0_axi_periph/M05_ACLK] [get_bd_pins microblaze_0_axi_periph/S00_ACLK] [get_bd_pins microblaze_0_local_memory/LMB_Clk] [get_bd_pins router_0/axis_clk] [get_bd_pins router_0/clk] [get_bd_pins rst_clk_wiz_1_100M/slowest_sync_clk]
   connect_bd_net -net microblaze_0_intr [get_bd_pins microblaze_0_axi_intc/intr] [get_bd_pins microblaze_0_xlconcat/dout]
+  connect_bd_net -net reset_n_0_1 [get_bd_ports reset_n_in] [get_bd_pins router_0/reset_n]
+  connect_bd_net -net router_0_stats_rx_bytes [get_bd_pins axi_gpio_0/gpio2_io_i] [get_bd_pins router_0/stats_rx_bytes]
+  connect_bd_net -net router_0_stats_rx_packets [get_bd_pins axi_gpio_0/gpio_io_i] [get_bd_pins router_0/stats_rx_packets]
+  connect_bd_net -net router_0_stats_tx_bytes [get_bd_pins axi_gpio_1/gpio2_io_i] [get_bd_pins router_0/stats_tx_bytes]
+  connect_bd_net -net router_0_stats_tx_packets [get_bd_pins axi_gpio_1/gpio_io_i] [get_bd_pins router_0/stats_tx_packets]
   connect_bd_net -net rst_clk_wiz_1_100M_bus_struct_reset [get_bd_pins microblaze_0_local_memory/SYS_Rst] [get_bd_pins rst_clk_wiz_1_100M/bus_struct_reset]
   connect_bd_net -net rst_clk_wiz_1_100M_interconnect_aresetn [get_bd_pins microblaze_0_axi_periph/ARESETN] [get_bd_pins rst_clk_wiz_1_100M/interconnect_aresetn]
   connect_bd_net -net rst_clk_wiz_1_100M_mb_reset [get_bd_pins microblaze_0/Reset] [get_bd_pins microblaze_0_axi_intc/processor_rst] [get_bd_pins rst_clk_wiz_1_100M/mb_reset]
