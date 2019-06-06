@@ -47,8 +47,8 @@
 // DO NOT MODIFY THIS FILE.
 
 
-// IP VLNV: me.jiegec:ip:router:1.0
-// IP Revision: 4
+// IP VLNV: me.jiegec:ip:router:1.1
+// IP Revision: 6
 
 (* X_CORE_INFO = "router_top,Vivado 2018.1" *)
 (* CHECK_LICENSE_TYPE = "design_1_router_0_0,router_top,{}" *)

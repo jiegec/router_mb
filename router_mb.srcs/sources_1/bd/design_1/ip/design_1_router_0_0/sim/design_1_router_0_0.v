@@ -47,8 +47,8 @@
 // DO NOT MODIFY THIS FILE.
 
 
-// IP VLNV: me.jiegec:ip:router:1.0
-// IP Revision: 4
+// IP VLNV: me.jiegec:ip:router:1.1
+// IP Revision: 6
 
 `timescale 1ns/1ps
 

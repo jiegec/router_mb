@@ -342,7 +342,7 @@ proc create_root_design { parentCell } {
  ] $microblaze_0_xlconcat
 
   # Create instance: router_0, and set properties
-  set router_0 [ create_bd_cell -type ip -vlnv me.jiegec:ip:router:1.0 router_0 ]
+  set router_0 [ create_bd_cell -type ip -vlnv me.jiegec:ip:router:1.1 router_0 ]
 
   # Create instance: rst_clk_wiz_1_100M, and set properties
   set rst_clk_wiz_1_100M [ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset:5.0 rst_clk_wiz_1_100M ]

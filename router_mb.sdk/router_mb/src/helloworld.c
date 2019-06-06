@@ -143,7 +143,7 @@ struct Route {
 const u8 portMAC[6] = {2, 2, 3, 3, 0, 0};
 
 void sendToFifo(u8 port, u8 *data, u32 length) {
-    xil_printf("Sending data to port %d of length %ld\n", port, length);
+    //xil_printf("Sending data to port %d of length %ld\n", port, length);
     while (!XLlFifo_iTxVacancy(&fifoInstance));
     XLlFifo_TxPutWord(&fifoInstance, (u32)port);
     for (u32 i = 0;i < length;i++) {
