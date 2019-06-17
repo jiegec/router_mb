@@ -1,7 +1,7 @@
 // Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
-// Tool Version: Vivado v.2018.1 (lin64) Build 2188600 Wed Apr  4 18:39:19 MDT 2018
-// Date        : Tue Jun  4 15:47:51 2019
+// Tool Version: Vivado v.2018.3 (lin64) Build 2405991 Thu Dec  6 23:36:41 MST 2018
+// Date        : Mon Jun 17 21:26:19 2019
 // Host        : oslab-Ubuntu16 running 64-bit Ubuntu 18.04.2 LTS
 // Command     : write_verilog -force -mode funcsim -rename_top design_1_auto_us_1 -prefix
 //               design_1_auto_us_1_ design_1_auto_us_1_sim_netlist.v
@@ -12,16 +12,16 @@
 // --------------------------------------------------------------------------------
 `timescale 1 ps / 1 ps
 
-module design_1_auto_us_1_axi_dwidth_converter_v2_1_16_axi4lite_upsizer
-   (s_axi_bvalid,
-    s_axi_awready,
+module design_1_auto_us_1_axi_dwidth_converter_v2_1_18_axi4lite_upsizer
+   (\gen_write.s_axi_bvalid_i_reg_0 ,
+    \gen_write.s_axi_awready_i_reg_0 ,
     s_axi_rdata,
     m_axi_wstrb,
     m_axi_bready,
     m_axi_rready,
-    m_axi_arvalid,
-    s_axi_rvalid,
-    m_axi_awvalid,
+    \gen_read.m_axi_arvalid_i_reg_0 ,
+    \gen_read.s_axi_rvalid_i_reg_0 ,
+    \gen_write.m_axi_awvalid_i_reg_0 ,
     m_axi_wvalid,
     s_axi_arready,
     s_axi_bready,
@@ -40,15 +40,15 @@ module design_1_auto_us_1_axi_dwidth_converter_v2_1_16_axi4lite_upsizer
     m_axi_wready,
     s_axi_arvalid,
     s_axi_araddr);
-  output s_axi_bvalid;
-  output s_axi_awready;
+  output \gen_write.s_axi_bvalid_i_reg_0 ;
+  output \gen_write.s_axi_awready_i_reg_0 ;
   output [31:0]s_axi_rdata;
   output [7:0]m_axi_wstrb;
   output m_axi_bready;
   output m_axi_rready;
-  output m_axi_arvalid;
-  output s_axi_rvalid;
-  output m_axi_awvalid;
+  output \gen_read.m_axi_arvalid_i_reg_0 ;
+  output \gen_read.s_axi_rvalid_i_reg_0 ;
+  output \gen_write.m_axi_awvalid_i_reg_0 ;
   output m_axi_wvalid;
   output s_axi_arready;
   input s_axi_bready;
@@ -75,22 +75,25 @@ module design_1_auto_us_1_axi_dwidth_converter_v2_1_16_axi4lite_upsizer
   wire \gen_read.ar_done_reg_n_0 ;
   wire \gen_read.araddr2_i_1_n_0 ;
   wire \gen_read.m_axi_arvalid_i_i_1_n_0 ;
+  wire \gen_read.m_axi_arvalid_i_reg_0 ;
   wire \gen_read.s_axi_arready_i_i_1_n_0 ;
   wire \gen_read.s_axi_rvalid_i_i_1_n_0 ;
+  wire \gen_read.s_axi_rvalid_i_reg_0 ;
   wire \gen_write.aw_done_i_1_n_0 ;
   wire \gen_write.aw_done_i_2_n_0 ;
   wire \gen_write.aw_done_reg_n_0 ;
   wire \gen_write.m_axi_awvalid_i_i_1_n_0 ;
   wire \gen_write.m_axi_awvalid_i_i_2_n_0 ;
+  wire \gen_write.m_axi_awvalid_i_reg_0 ;
   wire \gen_write.m_axi_wvalid_i_i_1_n_0 ;
   wire \gen_write.s_axi_awready_i_i_2_n_0 ;
+  wire \gen_write.s_axi_awready_i_reg_0 ;
   wire \gen_write.s_axi_bvalid_i_i_1_n_0 ;
+  wire \gen_write.s_axi_bvalid_i_reg_0 ;
   wire \gen_write.w_done_i_1_n_0 ;
   wire \gen_write.w_done_reg_n_0 ;
   wire m_axi_arready;
-  wire m_axi_arvalid;
   wire m_axi_awready;
-  wire m_axi_awvalid;
   wire m_axi_bready;
   wire m_axi_bready_i;
   wire m_axi_bvalid;
@@ -109,13 +112,10 @@ module design_1_auto_us_1_axi_dwidth_converter_v2_1_16_axi4lite_upsizer
   wire s_axi_arready_i0__0;
   wire s_axi_arvalid;
   wire [0:0]s_axi_awaddr;
-  wire s_axi_awready;
   wire s_axi_awvalid;
   wire s_axi_bready;
-  wire s_axi_bvalid;
   wire [31:0]s_axi_rdata;
   wire s_axi_rready;
-  wire s_axi_rvalid;
   wire [3:0]s_axi_wstrb;
   wire s_axi_wvalid;
 
@@ -125,17 +125,17 @@ module design_1_auto_us_1_axi_dwidth_converter_v2_1_16_axi4lite_upsizer
        (.I0(\gen_read.ar_done_reg_n_0 ),
         .I1(ar_done),
         .I2(out),
-        .I3(s_axi_rvalid),
+        .I3(\gen_read.s_axi_rvalid_i_reg_0 ),
         .I4(s_axi_rready),
         .O(\gen_read.ar_done_i_1_n_0 ));
   (* SOFT_HLUTNM = "soft_lutpair0" *) 
   LUT5 #(
     .INIT(32'h15000000)) 
     \gen_read.ar_done_i_2 
-       (.I0(s_axi_rvalid),
+       (.I0(\gen_read.s_axi_rvalid_i_reg_0 ),
         .I1(m_axi_rvalid),
         .I2(\gen_read.ar_done_reg_n_0 ),
-        .I3(m_axi_arvalid),
+        .I3(\gen_read.m_axi_arvalid_i_reg_0 ),
         .I4(m_axi_arready),
         .O(ar_done));
   FDRE \gen_read.ar_done_reg 
@@ -148,9 +148,9 @@ module design_1_auto_us_1_axi_dwidth_converter_v2_1_16_axi4lite_upsizer
     .INIT(64'hFEFFFFFF02000000)) 
     \gen_read.araddr2_i_1 
        (.I0(s_axi_araddr),
-        .I1(s_axi_rvalid),
+        .I1(\gen_read.s_axi_rvalid_i_reg_0 ),
         .I2(s_axi_arready_i0__0),
-        .I3(m_axi_arvalid),
+        .I3(\gen_read.m_axi_arvalid_i_reg_0 ),
         .I4(m_axi_arready),
         .I5(araddr2),
         .O(\gen_read.araddr2_i_1_n_0 ));
@@ -170,11 +170,11 @@ module design_1_auto_us_1_axi_dwidth_converter_v2_1_16_axi4lite_upsizer
   LUT6 #(
     .INIT(64'hEAEA0500FFFF0500)) 
     \gen_read.m_axi_arvalid_i_i_1 
-       (.I0(s_axi_rvalid),
+       (.I0(\gen_read.s_axi_rvalid_i_reg_0 ),
         .I1(m_axi_rvalid),
         .I2(\gen_read.ar_done_reg_n_0 ),
         .I3(s_axi_arvalid),
-        .I4(m_axi_arvalid),
+        .I4(\gen_read.m_axi_arvalid_i_reg_0 ),
         .I5(m_axi_arready),
         .O(\gen_read.m_axi_arvalid_i_i_1_n_0 ));
   FDRE #(
@@ -183,12 +183,12 @@ module design_1_auto_us_1_axi_dwidth_converter_v2_1_16_axi4lite_upsizer
        (.C(aclk),
         .CE(1'b1),
         .D(\gen_read.m_axi_arvalid_i_i_1_n_0 ),
-        .Q(m_axi_arvalid),
+        .Q(\gen_read.m_axi_arvalid_i_reg_0 ),
         .R(p_0_in));
   LUT2 #(
     .INIT(4'h8)) 
     \gen_read.m_axi_rready_i_i_1 
-       (.I0(s_axi_rvalid),
+       (.I0(\gen_read.s_axi_rvalid_i_reg_0 ),
         .I1(s_axi_rready),
         .O(m_axi_rready_i));
   FDSE #(
@@ -202,10 +202,10 @@ module design_1_auto_us_1_axi_dwidth_converter_v2_1_16_axi4lite_upsizer
   LUT6 #(
     .INIT(64'h0000008000800080)) 
     \gen_read.s_axi_arready_i_i_1 
-       (.I0(m_axi_arvalid),
+       (.I0(\gen_read.m_axi_arvalid_i_reg_0 ),
         .I1(m_axi_arready),
         .I2(out),
-        .I3(s_axi_rvalid),
+        .I3(\gen_read.s_axi_rvalid_i_reg_0 ),
         .I4(m_axi_rvalid),
         .I5(\gen_read.ar_done_reg_n_0 ),
         .O(\gen_read.s_axi_arready_i_i_1_n_0 ));
@@ -221,7 +221,7 @@ module design_1_auto_us_1_axi_dwidth_converter_v2_1_16_axi4lite_upsizer
     .INIT(16'h7444)) 
     \gen_read.s_axi_rvalid_i_i_1 
        (.I0(s_axi_rready),
-        .I1(s_axi_rvalid),
+        .I1(\gen_read.s_axi_rvalid_i_reg_0 ),
         .I2(\gen_read.ar_done_reg_n_0 ),
         .I3(m_axi_rvalid),
         .O(\gen_read.s_axi_rvalid_i_i_1_n_0 ));
@@ -231,23 +231,23 @@ module design_1_auto_us_1_axi_dwidth_converter_v2_1_16_axi4lite_upsizer
        (.C(aclk),
         .CE(1'b1),
         .D(\gen_read.s_axi_rvalid_i_i_1_n_0 ),
-        .Q(s_axi_rvalid),
+        .Q(\gen_read.s_axi_rvalid_i_reg_0 ),
         .R(p_0_in));
   LUT6 #(
     .INIT(64'h00000000AAAAEAAA)) 
     \gen_write.aw_done_i_1 
        (.I0(\gen_write.aw_done_reg_n_0 ),
-        .I1(m_axi_awvalid),
+        .I1(\gen_write.m_axi_awvalid_i_reg_0 ),
         .I2(\gen_write.m_axi_awvalid_i_i_2_n_0 ),
         .I3(m_axi_awready),
-        .I4(s_axi_bvalid),
+        .I4(\gen_write.s_axi_bvalid_i_reg_0 ),
         .I5(\gen_write.aw_done_i_2_n_0 ),
         .O(\gen_write.aw_done_i_1_n_0 ));
   (* SOFT_HLUTNM = "soft_lutpair2" *) 
   LUT3 #(
     .INIT(8'h8F)) 
     \gen_write.aw_done_i_2 
-       (.I0(s_axi_bvalid),
+       (.I0(\gen_write.s_axi_bvalid_i_reg_0 ),
         .I1(s_axi_bready),
         .I2(out),
         .O(\gen_write.aw_done_i_2_n_0 ));
@@ -261,9 +261,9 @@ module design_1_auto_us_1_axi_dwidth_converter_v2_1_16_axi4lite_upsizer
     .INIT(64'hDF00DF00DF22DF00)) 
     \gen_write.m_axi_awvalid_i_i_1 
        (.I0(\gen_write.m_axi_awvalid_i_i_2_n_0 ),
-        .I1(s_axi_bvalid),
+        .I1(\gen_write.s_axi_bvalid_i_reg_0 ),
         .I2(m_axi_awready),
-        .I3(m_axi_awvalid),
+        .I3(\gen_write.m_axi_awvalid_i_reg_0 ),
         .I4(s_axi_awvalid),
         .I5(\gen_write.aw_done_reg_n_0 ),
         .O(\gen_write.m_axi_awvalid_i_i_1_n_0 ));
@@ -271,7 +271,7 @@ module design_1_auto_us_1_axi_dwidth_converter_v2_1_16_axi4lite_upsizer
   LUT3 #(
     .INIT(8'h15)) 
     \gen_write.m_axi_awvalid_i_i_2 
-       (.I0(s_axi_awready),
+       (.I0(\gen_write.s_axi_awready_i_reg_0 ),
         .I1(\gen_write.aw_done_reg_n_0 ),
         .I2(\gen_write.w_done_reg_n_0 ),
         .O(\gen_write.m_axi_awvalid_i_i_2_n_0 ));
@@ -281,14 +281,14 @@ module design_1_auto_us_1_axi_dwidth_converter_v2_1_16_axi4lite_upsizer
        (.C(aclk),
         .CE(1'b1),
         .D(\gen_write.m_axi_awvalid_i_i_1_n_0 ),
-        .Q(m_axi_awvalid),
+        .Q(\gen_write.m_axi_awvalid_i_reg_0 ),
         .R(p_0_in));
   (* SOFT_HLUTNM = "soft_lutpair2" *) 
   LUT2 #(
     .INIT(4'h8)) 
     \gen_write.m_axi_bready_i_i_1 
        (.I0(s_axi_bready),
-        .I1(s_axi_bvalid),
+        .I1(\gen_write.s_axi_bvalid_i_reg_0 ),
         .O(m_axi_bready_i));
   FDRE #(
     .INIT(1'b0)) 
@@ -302,7 +302,7 @@ module design_1_auto_us_1_axi_dwidth_converter_v2_1_16_axi4lite_upsizer
     .INIT(32'hDF22DF00)) 
     \gen_write.m_axi_wvalid_i_i_1 
        (.I0(\gen_write.m_axi_awvalid_i_i_2_n_0 ),
-        .I1(s_axi_bvalid),
+        .I1(\gen_write.s_axi_bvalid_i_reg_0 ),
         .I2(m_axi_wready),
         .I3(m_axi_wvalid),
         .I4(m_axi_wvalid_i0__2),
@@ -310,7 +310,7 @@ module design_1_auto_us_1_axi_dwidth_converter_v2_1_16_axi4lite_upsizer
   LUT4 #(
     .INIT(16'h00E0)) 
     \gen_write.m_axi_wvalid_i_i_2 
-       (.I0(m_axi_awvalid),
+       (.I0(\gen_write.m_axi_awvalid_i_reg_0 ),
         .I1(\gen_write.aw_done_reg_n_0 ),
         .I2(s_axi_wvalid),
         .I3(\gen_write.w_done_reg_n_0 ),
@@ -335,8 +335,8 @@ module design_1_auto_us_1_axi_dwidth_converter_v2_1_16_axi4lite_upsizer
        (.I0(m_axi_bvalid),
         .I1(\gen_write.aw_done_reg_n_0 ),
         .I2(\gen_write.w_done_reg_n_0 ),
-        .I3(s_axi_awready),
-        .I4(s_axi_bvalid),
+        .I3(\gen_write.s_axi_awready_i_reg_0 ),
+        .I4(\gen_write.s_axi_bvalid_i_reg_0 ),
         .O(\gen_write.s_axi_awready_i_i_2_n_0 ));
   FDRE #(
     .INIT(1'b0)) 
@@ -344,14 +344,14 @@ module design_1_auto_us_1_axi_dwidth_converter_v2_1_16_axi4lite_upsizer
        (.C(aclk),
         .CE(1'b1),
         .D(\gen_write.s_axi_awready_i_i_2_n_0 ),
-        .Q(s_axi_awready),
+        .Q(\gen_write.s_axi_awready_i_reg_0 ),
         .R(p_0_in));
   LUT3 #(
     .INIT(8'h74)) 
     \gen_write.s_axi_bvalid_i_i_1 
        (.I0(s_axi_bready),
-        .I1(s_axi_bvalid),
-        .I2(s_axi_awready),
+        .I1(\gen_write.s_axi_bvalid_i_reg_0 ),
+        .I2(\gen_write.s_axi_awready_i_reg_0 ),
         .O(\gen_write.s_axi_bvalid_i_i_1_n_0 ));
   FDRE #(
     .INIT(1'b0)) 
@@ -359,7 +359,7 @@ module design_1_auto_us_1_axi_dwidth_converter_v2_1_16_axi4lite_upsizer
        (.C(aclk),
         .CE(1'b1),
         .D(\gen_write.s_axi_bvalid_i_i_1_n_0 ),
-        .Q(s_axi_bvalid),
+        .Q(\gen_write.s_axi_bvalid_i_reg_0 ),
         .R(p_0_in));
   LUT6 #(
     .INIT(64'h00000000AAAAEAAA)) 
@@ -368,7 +368,7 @@ module design_1_auto_us_1_axi_dwidth_converter_v2_1_16_axi4lite_upsizer
         .I1(m_axi_wready),
         .I2(\gen_write.m_axi_awvalid_i_i_2_n_0 ),
         .I3(m_axi_wvalid),
-        .I4(s_axi_bvalid),
+        .I4(\gen_write.s_axi_bvalid_i_reg_0 ),
         .I5(\gen_write.aw_done_i_2_n_0 ),
         .O(\gen_write.w_done_i_1_n_0 ));
   FDRE \gen_write.w_done_reg 
@@ -700,7 +700,7 @@ endmodule
 (* C_S_AXI_DATA_WIDTH = "32" *) (* C_S_AXI_ID_WIDTH = "1" *) (* DowngradeIPIdentifiedWarnings = "yes" *) 
 (* P_AXI3 = "1" *) (* P_AXI4 = "0" *) (* P_AXILITE = "2" *) 
 (* P_CONVERSION = "2" *) (* P_MAX_SPLIT_BEATS = "16" *) 
-module design_1_auto_us_1_axi_dwidth_converter_v2_1_16_top
+module design_1_auto_us_1_axi_dwidth_converter_v2_1_18_top
    (s_axi_aclk,
     s_axi_aresetn,
     s_axi_awid,
@@ -961,12 +961,15 @@ module design_1_auto_us_1_axi_dwidth_converter_v2_1_16_top
   assign s_axi_wready = s_axi_awready;
   GND GND
        (.G(\<const0> ));
-  design_1_auto_us_1_axi_dwidth_converter_v2_1_16_axi4lite_upsizer \gen_upsizer.gen_lite_upsizer.lite_upsizer_inst 
+  design_1_auto_us_1_axi_dwidth_converter_v2_1_18_axi4lite_upsizer \gen_upsizer.gen_lite_upsizer.lite_upsizer_inst 
        (.aclk(s_axi_aclk),
+        .\gen_read.m_axi_arvalid_i_reg_0 (m_axi_arvalid),
+        .\gen_read.s_axi_rvalid_i_reg_0 (s_axi_rvalid),
+        .\gen_write.m_axi_awvalid_i_reg_0 (m_axi_awvalid),
+        .\gen_write.s_axi_awready_i_reg_0 (s_axi_awready),
+        .\gen_write.s_axi_bvalid_i_reg_0 (s_axi_bvalid),
         .m_axi_arready(m_axi_arready),
-        .m_axi_arvalid(m_axi_arvalid),
         .m_axi_awready(m_axi_awready),
-        .m_axi_awvalid(m_axi_awvalid),
         .m_axi_bready(m_axi_bready),
         .m_axi_bvalid(m_axi_bvalid),
         .m_axi_rdata(m_axi_rdata),
@@ -980,18 +983,15 @@ module design_1_auto_us_1_axi_dwidth_converter_v2_1_16_top
         .s_axi_arready(s_axi_arready),
         .s_axi_arvalid(s_axi_arvalid),
         .s_axi_awaddr(s_axi_awaddr[2]),
-        .s_axi_awready(s_axi_awready),
         .s_axi_awvalid(s_axi_awvalid),
         .s_axi_bready(s_axi_bready),
-        .s_axi_bvalid(s_axi_bvalid),
         .s_axi_rdata(s_axi_rdata),
         .s_axi_rready(s_axi_rready),
-        .s_axi_rvalid(s_axi_rvalid),
         .s_axi_wstrb(s_axi_wstrb),
         .s_axi_wvalid(s_axi_wvalid));
 endmodule
 
-(* CHECK_LICENSE_TYPE = "design_1_auto_us_1,axi_dwidth_converter_v2_1_16_top,{}" *) (* DowngradeIPIdentifiedWarnings = "yes" *) (* X_CORE_INFO = "axi_dwidth_converter_v2_1_16_top,Vivado 2018.1" *) 
+(* CHECK_LICENSE_TYPE = "design_1_auto_us_1,axi_dwidth_converter_v2_1_18_top,{}" *) (* DowngradeIPIdentifiedWarnings = "yes" *) (* X_CORE_INFO = "axi_dwidth_converter_v2_1_18_top,Vivado 2018.3" *) 
 (* NotValidForBitStream *)
 module design_1_auto_us_1
    (s_axi_aclk,
@@ -1034,8 +1034,8 @@ module design_1_auto_us_1
     m_axi_rresp,
     m_axi_rvalid,
     m_axi_rready);
-  (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 SI_CLK CLK" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME SI_CLK, FREQ_HZ 100000000, PHASE 0.0, CLK_DOMAIN /clk_wiz_1_clk_out1, ASSOCIATED_BUSIF S_AXI:M_AXI, ASSOCIATED_RESET S_AXI_ARESETN" *) input s_axi_aclk;
-  (* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 SI_RST RST" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME SI_RST, POLARITY ACTIVE_LOW, TYPE INTERCONNECT" *) input s_axi_aresetn;
+  (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 SI_CLK CLK" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME SI_CLK, FREQ_HZ 100000000, PHASE 0.0, CLK_DOMAIN /clk_wiz_1_clk_out1, ASSOCIATED_BUSIF S_AXI:M_AXI, ASSOCIATED_RESET S_AXI_ARESETN, INSERT_VIP 0" *) input s_axi_aclk;
+  (* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 SI_RST RST" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME SI_RST, POLARITY ACTIVE_LOW, INSERT_VIP 0, TYPE INTERCONNECT" *) input s_axi_aresetn;
   (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S_AXI AWADDR" *) input [31:0]s_axi_awaddr;
   (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S_AXI AWPROT" *) input [2:0]s_axi_awprot;
   (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S_AXI AWVALID" *) input s_axi_awvalid;
@@ -1054,7 +1054,7 @@ module design_1_auto_us_1
   (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S_AXI RDATA" *) output [31:0]s_axi_rdata;
   (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S_AXI RRESP" *) output [1:0]s_axi_rresp;
   (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S_AXI RVALID" *) output s_axi_rvalid;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S_AXI RREADY" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME S_AXI, DATA_WIDTH 32, PROTOCOL AXI4LITE, FREQ_HZ 100000000, ID_WIDTH 0, ADDR_WIDTH 32, AWUSER_WIDTH 0, ARUSER_WIDTH 0, WUSER_WIDTH 0, RUSER_WIDTH 0, BUSER_WIDTH 0, READ_WRITE_MODE READ_WRITE, HAS_BURST 0, HAS_LOCK 0, HAS_PROT 1, HAS_CACHE 0, HAS_QOS 0, HAS_REGION 0, HAS_WSTRB 1, HAS_BRESP 1, HAS_RRESP 1, SUPPORTS_NARROW_BURST 0, NUM_READ_OUTSTANDING 1, NUM_WRITE_OUTSTANDING 1, MAX_BURST_LENGTH 1, PHASE 0.0, CLK_DOMAIN /clk_wiz_1_clk_out1, NUM_READ_THREADS 1, NUM_WRITE_THREADS 1, RUSER_BITS_PER_BYTE 0, WUSER_BITS_PER_BYTE 0" *) input s_axi_rready;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S_AXI RREADY" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME S_AXI, DATA_WIDTH 32, PROTOCOL AXI4LITE, FREQ_HZ 100000000, ID_WIDTH 0, ADDR_WIDTH 32, AWUSER_WIDTH 0, ARUSER_WIDTH 0, WUSER_WIDTH 0, RUSER_WIDTH 0, BUSER_WIDTH 0, READ_WRITE_MODE READ_WRITE, HAS_BURST 0, HAS_LOCK 0, HAS_PROT 1, HAS_CACHE 0, HAS_QOS 0, HAS_REGION 0, HAS_WSTRB 1, HAS_BRESP 1, HAS_RRESP 1, SUPPORTS_NARROW_BURST 0, NUM_READ_OUTSTANDING 1, NUM_WRITE_OUTSTANDING 1, MAX_BURST_LENGTH 1, PHASE 0.0, CLK_DOMAIN /clk_wiz_1_clk_out1, NUM_READ_THREADS 1, NUM_WRITE_THREADS 1, RUSER_BITS_PER_BYTE 0, WUSER_BITS_PER_BYTE 0, INSERT_VIP 0" *) input s_axi_rready;
   (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 M_AXI AWADDR" *) output [31:0]m_axi_awaddr;
   (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 M_AXI AWPROT" *) output [2:0]m_axi_awprot;
   (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 M_AXI AWVALID" *) output m_axi_awvalid;
@@ -1073,7 +1073,7 @@ module design_1_auto_us_1
   (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 M_AXI RDATA" *) input [63:0]m_axi_rdata;
   (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 M_AXI RRESP" *) input [1:0]m_axi_rresp;
   (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 M_AXI RVALID" *) input m_axi_rvalid;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 M_AXI RREADY" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME M_AXI, DATA_WIDTH 64, PROTOCOL AXI4LITE, FREQ_HZ 100000000, ID_WIDTH 0, ADDR_WIDTH 32, AWUSER_WIDTH 0, ARUSER_WIDTH 0, WUSER_WIDTH 0, RUSER_WIDTH 0, BUSER_WIDTH 0, READ_WRITE_MODE READ_WRITE, HAS_BURST 0, HAS_LOCK 0, HAS_PROT 1, HAS_CACHE 0, HAS_QOS 0, HAS_REGION 0, HAS_WSTRB 1, HAS_BRESP 1, HAS_RRESP 1, SUPPORTS_NARROW_BURST 0, NUM_READ_OUTSTANDING 1, NUM_WRITE_OUTSTANDING 1, MAX_BURST_LENGTH 1, PHASE 0.0, CLK_DOMAIN /clk_wiz_1_clk_out1, NUM_READ_THREADS 1, NUM_WRITE_THREADS 1, RUSER_BITS_PER_BYTE 0, WUSER_BITS_PER_BYTE 0" *) output m_axi_rready;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 M_AXI RREADY" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME M_AXI, DATA_WIDTH 64, PROTOCOL AXI4LITE, FREQ_HZ 100000000, ID_WIDTH 0, ADDR_WIDTH 32, AWUSER_WIDTH 0, ARUSER_WIDTH 0, WUSER_WIDTH 0, RUSER_WIDTH 0, BUSER_WIDTH 0, READ_WRITE_MODE READ_WRITE, HAS_BURST 0, HAS_LOCK 0, HAS_PROT 1, HAS_CACHE 0, HAS_QOS 0, HAS_REGION 0, HAS_WSTRB 1, HAS_BRESP 1, HAS_RRESP 1, SUPPORTS_NARROW_BURST 0, NUM_READ_OUTSTANDING 1, NUM_WRITE_OUTSTANDING 1, MAX_BURST_LENGTH 1, PHASE 0.0, CLK_DOMAIN /clk_wiz_1_clk_out1, NUM_READ_THREADS 1, NUM_WRITE_THREADS 1, RUSER_BITS_PER_BYTE 0, WUSER_BITS_PER_BYTE 0, INSERT_VIP 0" *) output m_axi_rready;
 
   wire [31:0]m_axi_araddr;
   wire [2:0]m_axi_arprot;
@@ -1160,7 +1160,7 @@ module design_1_auto_us_1
   (* P_AXILITE = "2" *) 
   (* P_CONVERSION = "2" *) 
   (* P_MAX_SPLIT_BEATS = "16" *) 
-  design_1_auto_us_1_axi_dwidth_converter_v2_1_16_top inst
+  design_1_auto_us_1_axi_dwidth_converter_v2_1_18_top inst
        (.m_axi_aclk(1'b0),
         .m_axi_araddr(m_axi_araddr),
         .m_axi_arburst(NLW_inst_m_axi_arburst_UNCONNECTED[1:0]),

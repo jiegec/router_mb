@@ -47,11 +47,12 @@
 // DO NOT MODIFY THIS FILE.
 
 
-// IP VLNV: me.jiegec:ip:router:1.1
-// IP Revision: 6
+// IP VLNV: me.jiegec:ip:router:1.6
+// IP Revision: 18
 
 `timescale 1ns/1ps
 
+(* IP_DEFINITION_SOURCE = "package_project" *)
 (* DowngradeIPIdentifiedWarnings = "yes" *)
 module design_1_router_0_0 (
   clk,
@@ -79,6 +80,18 @@ module design_1_router_0_0 (
   rgmii2_td,
   rgmii2_tx_ctl,
   rgmii2_txc,
+  rgmii3_rd,
+  rgmii3_rx_ctl,
+  rgmii3_rxc,
+  rgmii3_td,
+  rgmii3_tx_ctl,
+  rgmii3_txc,
+  rgmii4_rd,
+  rgmii4_rx_ctl,
+  rgmii4_rxc,
+  rgmii4_td,
+  rgmii4_tx_ctl,
+  rgmii4_txc,
   stats_rx_packets,
   stats_rx_bytes,
   stats_tx_packets,
@@ -92,39 +105,39 @@ module design_1_router_0_0 (
   os_en
 );
 
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME clk, ASSOCIATED_BUSIF axis_rxd:axis_txd, FREQ_HZ 100000000, PHASE 0.0, CLK_DOMAIN /clk_wiz_1_clk_out1" *)
+(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME clk, FREQ_HZ 100000000, PHASE 0.0, CLK_DOMAIN /clk_wiz_1_clk_out1, INSERT_VIP 0" *)
 (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 clk CLK" *)
 input wire clk;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME clk_125M, FREQ_HZ 125000000, PHASE 0.0, CLK_DOMAIN /clk_wiz_1_clk_out1" *)
+(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME clk_125M, FREQ_HZ 125000000, PHASE 0.0, CLK_DOMAIN /clk_wiz_1_clk_out1, INSERT_VIP 0" *)
 (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 clk_125M CLK" *)
 input wire clk_125M;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME clk_200M, FREQ_HZ 200000000, PHASE 0.0, CLK_DOMAIN /clk_wiz_1_clk_out1" *)
+(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME clk_200M, FREQ_HZ 200000000, PHASE 0.0, CLK_DOMAIN /clk_wiz_1_clk_out1, INSERT_VIP 0" *)
 (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 clk_200M CLK" *)
 input wire clk_200M;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME reset_n, POLARITY ACTIVE_LOW" *)
+(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME reset_n, POLARITY ACTIVE_LOW, INSERT_VIP 0" *)
 (* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 reset_n RST" *)
 input wire reset_n;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME axis_clk, FREQ_HZ 100000000, PHASE 0.0, CLK_DOMAIN /clk_wiz_1_clk_out1" *)
+(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME axis_clk, ASSOCIATED_BUSIF axis_rxd:axis_txd, FREQ_HZ 100000000, PHASE 0.0, CLK_DOMAIN /clk_wiz_1_clk_out1, INSERT_VIP 0" *)
 (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 axis_clk CLK" *)
 input wire axis_clk;
 (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 axis_rxd TDATA" *)
-output wire [7 : 0] axis_rxd_tdata;
+input wire [7 : 0] axis_rxd_tdata;
 (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 axis_rxd TLAST" *)
-output wire axis_rxd_tlast;
+input wire axis_rxd_tlast;
 (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 axis_rxd TREADY" *)
-input wire axis_rxd_tready;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME axis_rxd, TDATA_NUM_BYTES 1, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 1, FREQ_HZ 100000000, PHASE 0.0, CLK_DOMAIN /clk_wiz_1_clk_out1, LAYERED_METADATA undef" *)
+output wire axis_rxd_tready;
+(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME axis_rxd, TDATA_NUM_BYTES 1, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 1, FREQ_HZ 100000000, PHASE 0.0, CLK_DOMAIN /clk_wiz_1_clk_out1, LAYERED_METADATA undef, INSERT_VIP 0" *)
 (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 axis_rxd TVALID" *)
-output wire axis_rxd_tvalid;
+input wire axis_rxd_tvalid;
 (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 axis_txd TDATA" *)
-input wire [7 : 0] axis_txd_tdata;
+output wire [7 : 0] axis_txd_tdata;
 (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 axis_txd TLAST" *)
-input wire axis_txd_tlast;
+output wire axis_txd_tlast;
 (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 axis_txd TREADY" *)
-output wire axis_txd_tready;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME axis_txd, TDATA_NUM_BYTES 1, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 1, FREQ_HZ 100000000, PHASE 0.0, CLK_DOMAIN /clk_wiz_1_clk_out1, LAYERED_METADATA undef" *)
+input wire axis_txd_tready;
+(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME axis_txd, TDATA_NUM_BYTES 1, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 1, FREQ_HZ 100000000, PHASE 0.0, CLK_DOMAIN /clk_wiz_1_clk_out1, LAYERED_METADATA undef, INSERT_VIP 0" *)
 (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 axis_txd TVALID" *)
-input wire axis_txd_tvalid;
+output wire axis_txd_tvalid;
 (* X_INTERFACE_INFO = "xilinx.com:interface:rgmii:1.0 rgmii1 RD" *)
 input wire [3 : 0] rgmii1_rd;
 (* X_INTERFACE_INFO = "xilinx.com:interface:rgmii:1.0 rgmii1 RX_CTL" *)
@@ -149,11 +162,35 @@ output wire [3 : 0] rgmii2_td;
 output wire rgmii2_tx_ctl;
 (* X_INTERFACE_INFO = "xilinx.com:interface:rgmii:1.0 rgmii2 TXC" *)
 output wire rgmii2_txc;
+(* X_INTERFACE_INFO = "xilinx.com:interface:rgmii:1.0 rgmii3 RD" *)
+input wire [3 : 0] rgmii3_rd;
+(* X_INTERFACE_INFO = "xilinx.com:interface:rgmii:1.0 rgmii3 RX_CTL" *)
+input wire rgmii3_rx_ctl;
+(* X_INTERFACE_INFO = "xilinx.com:interface:rgmii:1.0 rgmii3 RXC" *)
+input wire rgmii3_rxc;
+(* X_INTERFACE_INFO = "xilinx.com:interface:rgmii:1.0 rgmii3 TD" *)
+output wire [3 : 0] rgmii3_td;
+(* X_INTERFACE_INFO = "xilinx.com:interface:rgmii:1.0 rgmii3 TX_CTL" *)
+output wire rgmii3_tx_ctl;
+(* X_INTERFACE_INFO = "xilinx.com:interface:rgmii:1.0 rgmii3 TXC" *)
+output wire rgmii3_txc;
+(* X_INTERFACE_INFO = "xilinx.com:interface:rgmii:1.0 rgmii4 RD" *)
+input wire [3 : 0] rgmii4_rd;
+(* X_INTERFACE_INFO = "xilinx.com:interface:rgmii:1.0 rgmii4 RX_CTL" *)
+input wire rgmii4_rx_ctl;
+(* X_INTERFACE_INFO = "xilinx.com:interface:rgmii:1.0 rgmii4 RXC" *)
+input wire rgmii4_rxc;
+(* X_INTERFACE_INFO = "xilinx.com:interface:rgmii:1.0 rgmii4 TD" *)
+output wire [3 : 0] rgmii4_td;
+(* X_INTERFACE_INFO = "xilinx.com:interface:rgmii:1.0 rgmii4 TX_CTL" *)
+output wire rgmii4_tx_ctl;
+(* X_INTERFACE_INFO = "xilinx.com:interface:rgmii:1.0 rgmii4 TXC" *)
+output wire rgmii4_txc;
 output wire [255 : 0] stats_rx_packets;
 output wire [255 : 0] stats_rx_bytes;
 output wire [255 : 0] stats_tx_packets;
 output wire [255 : 0] stats_tx_bytes;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME os_clk, ASSOCIATED_RESET os_rst, FREQ_HZ 100000000, PHASE 0.000" *)
+(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME os_clk, ASSOCIATED_RESET os_rst, ASSOCIATED_BUSIF routing_table, FREQ_HZ 100000000, PHASE 0.000, INSERT_VIP 0" *)
 (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 os_clk CLK, xilinx.com:interface:bram:1.0 routing_table CLK" *)
 input wire os_clk;
 (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 routing_table ADDR" *)
@@ -164,10 +201,10 @@ input wire [127 : 0] os_din;
 output wire [127 : 0] os_dout;
 (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 routing_table WE" *)
 input wire [15 : 0] os_we;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME os_rst, POLARITY ACTIVE_LOW" *)
+(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME os_rst, POLARITY ACTIVE_LOW, INSERT_VIP 0" *)
 (* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 os_rst RST, xilinx.com:interface:bram:1.0 routing_table RST" *)
 input wire os_rst;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME routing_table, MEM_SIZE 16384, MEM_WIDTH 128, MEM_ECC NONE, MASTER_TYPE OTHER" *)
+(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME routing_table, MEM_SIZE 16384, MEM_WIDTH 128, MEM_ECC NONE, MASTER_TYPE OTHER, READ_LATENCY 1" *)
 (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 routing_table EN" *)
 input wire os_en;
 
@@ -197,6 +234,18 @@ input wire os_en;
     .rgmii2_td(rgmii2_td),
     .rgmii2_tx_ctl(rgmii2_tx_ctl),
     .rgmii2_txc(rgmii2_txc),
+    .rgmii3_rd(rgmii3_rd),
+    .rgmii3_rx_ctl(rgmii3_rx_ctl),
+    .rgmii3_rxc(rgmii3_rxc),
+    .rgmii3_td(rgmii3_td),
+    .rgmii3_tx_ctl(rgmii3_tx_ctl),
+    .rgmii3_txc(rgmii3_txc),
+    .rgmii4_rd(rgmii4_rd),
+    .rgmii4_rx_ctl(rgmii4_rx_ctl),
+    .rgmii4_rxc(rgmii4_rxc),
+    .rgmii4_td(rgmii4_td),
+    .rgmii4_tx_ctl(rgmii4_tx_ctl),
+    .rgmii4_txc(rgmii4_txc),
     .stats_rx_packets(stats_rx_packets),
     .stats_rx_bytes(stats_rx_bytes),
     .stats_tx_packets(stats_tx_packets),

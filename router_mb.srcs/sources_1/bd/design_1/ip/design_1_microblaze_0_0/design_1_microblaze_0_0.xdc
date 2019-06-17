@@ -180,6 +180,9 @@ create_waiver -internal -quiet -user microblaze -type CDC -id CDC-10 -descriptio
 create_waiver -internal -quiet -user microblaze -type CDC -id CDC-13 -description "Debug protocol ensures stable signals" \
   -from [get_pins -quiet MicroBlaze_Core_I/*.Core/*Debug_Logic.Master_Core.Debug*/Using_*_Breakpoints.All_*\[*\].*/*Compare\[*\].*/*/CLK] \
   -to   *PIN
+create_waiver -internal -quiet -user microblaze -type CDC -id CDC-13 -description "Debug protocol ensures stable signals" \
+  -from *PIN \
+  -to   [get_pins -quiet MicroBlaze_Core_I/*.Core/*Debug_Logic.Master_Core.Debug*/Using_*_Breakpoints.All_*\[*\].*/*Compare\[*\].*/*/D]
 create_waiver -internal -quiet -user microblaze -type CDC -id CDC-15 -description "Debug protocol ensures stable signals" \
   -from [get_pins -quiet MicroBlaze_Core_I/*.Core/*Debug_Logic.Master_Core.Debug*/Using_*_Breakpoints.All_*\[*\].*/*Compare\[*\].*/*/CLK] \
   -to   *PIN
